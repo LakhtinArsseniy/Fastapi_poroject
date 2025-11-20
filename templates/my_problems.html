@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Мої проблеми</title>
+    <style>
+        body { font-family: Arial; padding: 0; margin: 0; background: #f0f0f0; }
+        .container { max-width: 800px; margin: 50px auto; padding: 20px; background: white; border-radius: 10px; }
+        .problem { border-bottom: 1px solid #ddd; padding: 15px 0; }
+        .problem:last-child { border-bottom: none; }
+        .buttons form, .buttons a { display: inline-block; margin-right: 10px; }
+        .buttons button, .buttons a { padding: 5px 10px; border-radius: 5px; text-decoration: none; color: white; background: #007BFF; border: none; cursor: pointer; }
+        .buttons button:hover, .buttons a:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Мої проблеми</h1>
+        <a href="/" style="float:right; padding:8px 16px; background-color:#f44336; color:white; text-decoration:none; border-radius:5px;">Вийти</a>
+
+
+        <a href="/new_problem" style="margin-bottom: 20px; display:inline-block;">Додати нову проблему</a>
+
+        {% for i in problems %}
+        <div class="problem">
+            <h3>{{ i.title }}</h3>
+            <p>{{ i.description }}</p>
+            <small>{{ i.date_created }}</small>
+
+            <div class="buttons">
+                <a href="/edit_problem?id={{ i.id }}">Редагувати</a>
+                <form action="/delete_problem" method="post" style="display:inline;">
+                    <input type="hidden" name="id" value="{{ i.id }}">
+                    <button type="submit">Видалити</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+</body>
+</html>

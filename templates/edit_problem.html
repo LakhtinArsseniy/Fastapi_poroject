@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Редагувати проблему</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Редагувати проблему</h1>
+    <form method="POST" action="/edit_problem">
+    <input type="hidden" name="id" value="{{ problem.id }}">
+
+    <label for="title">Заголовок:</label>
+    <input type="text" id="title" name="title" value="{{ problem.title }}" required>
+
+    <label for="description">Опис:</label>
+    <textarea id="description" name="description" rows="5" required>{{ problem.description }}</textarea>
+
+    <button type="submit">Зберегти зміни</button>
+</form>
+
+</body>
+</html>

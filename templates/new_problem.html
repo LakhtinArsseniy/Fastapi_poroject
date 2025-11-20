@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Додати відповідь</title>
+    <title>Додати проблему</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #f6d365, #fda085);
+            background: #f0f2f5;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
         .container {
             background: white;
@@ -20,16 +19,15 @@
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             width: 100%;
-            max-width: 500px;
+            max-width: 400px;
             text-align: center;
         }
         input, textarea {
             width: 100%;
-            padding: 10px;
+            padding: 10px 12px;
             margin: 10px 0;
             border-radius: 8px;
             border: 1px solid #ccc;
-            font-size: 1rem;
         }
         button {
             padding: 12px 20px;
@@ -38,38 +36,42 @@
             background-color: #4CAF50;
             color: white;
             cursor: pointer;
-            font-size: 1rem;
             transition: 0.3s;
         }
         button:hover {
             background-color: #45a049;
         }
-        .back-button {
-            margin-top: 15px;
+        .file-button {
             display: inline-block;
-            background-color: #007BFF;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #FF6B6B;
             color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            text-decoration: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
         }
-        .back-button:hover {
-            background-color: #0056b3;
+        .file-button:hover {
+            background-color: #e55b5b;
+            transform: translateY(-2px);
+        }
+        input[type="file"] {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Додати відповідь на проблему</h2>
-        <form method="post">
-            <input type="hidden" name="problem_id" value="{{ problem.id }}">
-            <textarea name="answer" placeholder="Ваша відповідь..." rows="5" required></textarea>
-            <button type="submit">Додати відповідь</button>
+        <h2>Додати нову проблему</h2>
+        <form method="post" enctype="multipart/form-data">
+            <input type="text" name="title" placeholder="Заголовок проблеми" required>
+            <textarea name="description" placeholder="Опис проблеми" rows="5" required></textarea>
+            <input type="file" name="file" id="file">
+            <label for="file" class="file-button">Додати файл</label>
+
+            <button type="submit">Додати</button>
         </form>
-        <a href="/my_problems" class="back-button">Назад</a>
-        {% if message %}
-        <p>{{ message }}</p>
-        {% endif %}
     </div>
 </body>
 </html>

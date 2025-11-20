@@ -1,26 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Адмін: Проблеми користувачів</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f8f9fa; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background-color: #eee; }
+        a.button { padding: 5px 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px; margin-right: 5px; }
+        a.button:hover { background-color: #0056b3; }
+        .delete-button { background-color: #dc3545; }
+        .delete-button:hover { background-color: #b02a37; }
+    </style>
 </head>
 <body>
-<h2>Мої незактриті запити:</h2>
-{%for i in problems%}
-    <h4>{{i.title}}</h4>
-    <p>{{i.description}}</p>
-    <small>{{i.date_created}}</small>
-
-    <form action="add_answer">
-    <button type="submit">Додати відповідь</button>
-      <input type="hidden" name="problem_id" value="{{i.id}}">
-    </form>
-
-    <form action="">
-    <button type="submit">Закрити проблему</button>
-      <input type="hidden" name="problem_id" value="{{i.id}}">
-    </form>
-
-{%endfor%}
+    <h1>Список проблем користувачів</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Заголовок</th>
+            <th>Користувач</th>
+            <th>Статус</th>
+            <th>Дія</th>
+        </tr>
+        {% for problem in problems %}
+        <tr>
+            <td>{{ problem.id }}</td>
+            <td>{{ problem.title }}</td>
+            <td>{{ problem.user.username }}</td>
+            <td>{{ problem.status }}</td>
+            <td>
+                <a class="button" href="/problem_check?id={{ problem.id }}">Переглянути</a>
+                <a class="button" href="/add_answer?id={{ problem.id }}">Додати відповідь</a>
+                <a class="button delete-button" href="/delete_problem?id={{ problem.id }}">Видалити</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Головна - Сайт проблем</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 400px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            background-color: #6C63FF;
+            padding: 12px 25px;
+            margin: 0 10px;
+            border-radius: 10px;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        a:hover {
+            background-color: #5750d6;
+            transform: translateY(-2px);
+        }
+        .tg-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #0088cc;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .tg-button:hover {
+            background-color: #0077b3;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <a href="https://t.me/Fastapi98_bot" target="_blank" class="tg-button">Оціни нас у Telegram</a>
+
+    <div class="container">
+        <h1>Ласкаво просимо на сайт проблем!</h1>
+        <p>
+            <a href="/login">Увійти</a>
+            <a href="/register">Реєстрація</a>
+        </p>
+    </div>
+
+    <style>
+        .tg-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #0088cc;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: background 0.3s, transform 0.2s;
+            z-index: 1000;
+        }
+
+        .tg-button:hover {
+            background-color: #006699;
+            transform: translateY(-2px);
+        }
+    </style>
+</body>
+
+</html>

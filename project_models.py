@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 import bcrypt
 
-DATABASE_URL = "postgresql+asyncpg://username:1987@localhost:5432/postgres"
+DATABASE_URL = "postgresql+asyncpg://postgres:1987@localhost:5432/postgres"
 
 
 engine = create_async_engine(DATABASE_URL, echo=True)
@@ -22,7 +22,7 @@ class Problem(Base):
     status = Column(String(250), default="В обробці")
 
     user_id = Column(Integer, ForeignKey("users.id"))
-    admin_id = Column(Integer, ForeignKey("users.id"), nullable=True)  # адміністратор, що взяв у роботу
+    admin_id = Column(Integer, ForeignKey("users.id"), nullable=True)  
 
     user = relationship("User", foreign_keys=[user_id], back_populates="problems")
     admin = relationship("User", foreign_keys=[admin_id],back_populates="assigned_problems")
@@ -44,7 +44,7 @@ class User(Base):
 
     def set_password(self, raw_password: str):
         hashed = bcrypt.hashpw(raw_password.encode("utf-8"), bcrypt.gensalt())
-        self.password = hashed.decode("utf-8")  # зберігаємо як str
+        self.password = hashed.decode("utf-8") 
 
     def verify_password(self, raw_password: str) -> bool:
         return bcrypt.checkpw(raw_password.encode("utf-8"), self.password.encode("utf-8"))
@@ -66,7 +66,7 @@ class ServiceRecord(Base):
     id = Column(Integer, primary_key=True)
     work_done = Column(String(1000))
     date_completed = Column(DateTime(timezone=True), server_default=func.now())
-    parts_used = Column(String(1000), nullable=True)  # можеш пізніше зробити окрему таблицю
+    parts_used = Column(String(1000), nullable=True)  
     warranty_info = Column(String(1000))
 
     problem_id = Column(Integer, ForeignKey("problems.id"))
@@ -80,3 +80,14 @@ class Users_in_telegram(Base):
     user_tg_id = Column(String(50), nullable=True)
     user_in_site = Column(Integer,ForeignKey('users.id'))
     date_created = Column(DateTime(timezone=True), server_default=func.now())
+
+class AdminQuestion(Base):
+    __tablename__ = "admin_questions"
+
+    id = Column(Integer, primary_key=True)
+    subject = Column(String(250), nullable=False)
+    message = Column(Text, nullable=False)
+    date_created = Column(DateTime(timezone=True), server_default=func.now())
+
+    user_id = Column(Integer, ForeignKey("users.id"))
+    user = relationship("User", backref="admin_questions")
